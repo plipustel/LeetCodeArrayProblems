@@ -4,6 +4,7 @@
  * @CODER : PLIPUS TEL
  * @DATE : NOV 2023
  * @STATUS : UNSOLVED YET
+ * @PROGRESS: still O(n^2), need to make it faster than O(n). It must O(n log n) or O(log n)
  * 
  * @SOURCE: https://leetcode.com/problems/two-sum/
  * @PROBLEM : Given an array of integers nums and an integer target, return
@@ -37,11 +38,28 @@ public class TwoSum {
 	 */
 	public int[] twoSum(int[] nums, int target) {
 		return nums;
+		
 
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		// O(n^2)
+		int[] nums = {2, 12, 43,11, 6, 3}; 
+		for( int i = 0; i < nums.length; i++) {
+			System.out.println("Loop i=" + i + ":");
+			
+			for( int j = 0; j < nums.length; j++) {
+				System.out.println("     Loop j=" + j + ":");
+				
+				if ((nums[i] + nums[j]) == 9) {
+					System.out.println("[" + i + "," + j + "]");
+
+					break;
+				}
+			}
+		}
 		
 	}
 
