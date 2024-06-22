@@ -37,6 +37,7 @@
 
 class Solution(object):
     def twoSum(self, nums, target):
+        
         # creating hash table
         hash_table = {}
         for i in range(0, len(nums)):
@@ -47,8 +48,8 @@ class Solution(object):
                 hash_table[nums[i]] = i
 
 
-# case1: nums = [2,7,11,15], target = 9, output: [0,1]
-# case2: nums = [3,2,4], target = 6, output: [1,2]
-# case3: nums = [3,3], target = 6, output: [0,1]
+# case1: nums = [2,7,11,15], target = 9 => output: [0,1]
+# case2: nums = [3,2,4], target = 6 => output: [1,2]
+# case3: nums = [3,3], target = 6 =>  output: [0,1]
 sol = Solution()
 print(sol.twoSum([2,7,11,15], 9))
