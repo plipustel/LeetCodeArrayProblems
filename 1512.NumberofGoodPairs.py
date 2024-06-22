@@ -37,20 +37,21 @@ class Solution(object):
     def __init__(self):
         self.arr = []
         
-    def buildArray(self, nums):
+    def numIdenticalPairs(self, nums):
         return self._buildArray(nums, 0)
     
     def _buildArray(self, nums, start):
-     
         if start >= len(nums):
             return 
         for r in range(start, (len(nums) - 1)):
            if ((nums[start] == nums[r+1]) and (r < r+1)):
-                print(f'({start}, {r+1}):{nums[start]}, {nums[r+1]}')
+               # print(f'({start}, {r+1}):{nums[start]}, {nums[r+1]}')
                 self.arr.append((nums[start], nums[r+1]))
+
         self._buildArray(nums, start + 1)
+        return len(self.arr)
         
 # Test: case1 = [1,2,3,1,1,3], case 2 = [1,1,1,1], case 3 = [1,2,3]    
 nums = [1,2,3,1,1,3]
 sol = Solution()
-sol._buildArray(nums, 0)
+print(sol.numIdenticalPairs(nums))
