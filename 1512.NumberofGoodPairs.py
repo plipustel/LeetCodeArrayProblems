@@ -8,7 +8,7 @@
 # @LEETCODE      : https://leetcode.com/u/plipustel/
 # @DATE          : SATURDAY, JUN 22 2024
 #
-# @SOURCE        : www.leetcode.com <https://leetcode.com/problems/number-of-good-pairs/description/>
+# @PROBELM SOURCE: www.leetcode.com <https://leetcode.com/problems/number-of-good-pairs/description/>
 # @PROBLEM DESC  :
 # Given an array of integers nums, return the number of good pairs.
 # A pair (i, j) is called good if nums[i] == nums[j] and i < j.
