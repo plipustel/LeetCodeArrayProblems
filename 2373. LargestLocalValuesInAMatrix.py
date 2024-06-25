@@ -30,3 +30,31 @@
 # n == grid.length == grid[i].length
 # 3 <= n <= 100
 # 1 <= grid[i][j] <= 100
+
+class Solution(object):
+    def largestLocal(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        n = len(grid)
+        
+        # build matrix n-2 x n-2
+        output = [[None] * (n- 2) for x in range(n - 2)]
+        
+        for i in range(n - 2):
+            for j in range(n - 2):
+                find_max = max(grid[i][j], grid[i][j+1], grid[i][j+2],
+                         grid[i+1][j], grid[i+1][j+1], grid[i+1][j+2],
+                         grid[i+2][j], grid[i+2][j+1], grid[i+2][j+2])
+              
+                output[i][j] = find_max
+       
+        return output
+        
+# test        
+grid = [[9,9,8,1],[5,6,2,6],[8,2,6,4],[6,2,2,2]]
+grid1 = [[1,1,1,1,1],[1,1,1,1,1],[1,1,2,1,1],[1,1,1,1,1],[1,1,1,1,1]]
+sol = Solution()
+print(sol.largestLocal(grid))
+        
