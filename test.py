@@ -6,72 +6,74 @@ class Solution(object):
         :type score: List[int]
         :rtype: int
         """
-        # Helper function to calculate the score of a word
+        #sort
+        sort = sorted(letters)
+        c_score =[s for s in score if s != 0]
+        c_letters = []
         
-        def word_score(word):
-            return sum(score[ord(char) - ord('a')] for char in word)
+        c_sc = {}
+        c_words = []
+        
+        c_length_words = []
+        
+        cur_str = ''
+    
+        for i in range(len(sort)):
+            if sort[i] not in c_letters:
+                c_letters.append(sort[i])
+                
+        for i in range(len(c_letters)):
+            c_sc[c_letters[i]] = c_score[i]
+        
+        for i in range(len(words)):
+            if all(chars in c_letters for chars in words[i]):
+                c_words.append(words[i])
+        
+        #print(c_words)
+        for i in range(len(c_words)):
+            cur_str = ''
+            for j in range(i, len(c_words)):
+                cur_str = cur_str + c_words[j]  
+                c_length_words.append(cur_str)
+        
+        #print(letters)
+        #print(c_length_words)
+        
+        final_scores = []
+        count = 0
+        for w in range(len(c_length_words)):
+           # print(c_length_words[w])
+            for char in letters:
+                #if char in c_length_words[w]:
+                    char_in_words = c_length_words[w].count(char)
+                    char_in_letters = letters.count(char)
+                    if (char_in_words > char_in_letters) and (c_length_words[w] not in final_scores):
+                        final_scores.append(c_length_words[w])
+                    #print(char, letters.count(char), char_in_words)
+                    
+        #print(final_scores)
+        result = [item for item in c_length_words if item not in final_scores]
+        
+        
+        #print(c_sc)
+        total = {}
+        for i in range(len(result)):
+            #print(result[i])
+            res = 0
+            for a in result[i]:
+                res += c_sc[a]
+                total[result[i]] = res
+           
+        if total:
+            return max(total.values())
+        else:
+            return 0  
+       
+        
+        
+words = ["dog","cat","dad","good"]
+letters = ["a","a","c","d","d","d","g","o","o"]
+score = [1,0,9,5,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0]
 
-        # Helper function to count the letters in a word
-        def count_letters(word):
-            counts = [0] * 26
-            for char in word:
-                counts[ord(char) - ord('a')] += 1
-            return counts
-
-        # Helper function to check if we can form a word with available letters
-        def can_form(word_count, available_count):
-            for i in range(26):
-                if word_count[i] > available_count[i]:
-                    return False
-            return True
-
-        # Recursive function to find the maximum score
-        def find_max_score(index, available_count):
-            if index == len(words):
-                return 0
-
-            # Option 1: Skip the current word
-            max_score = find_max_score(index + 1, available_count)
-
-            # Option 2: Include the current word (if possible)
-            word = words[index]
-            word_count = count_letters(word)
-
-            if can_form(word_count, available_count):
-                # Update the available count
-                for i in range(26):
-                    available_count[i] -= word_count[i]
-
-                # Recur with the current word included
-                max_score = max(max_score, word_score(word) + find_max_score(index + 1, available_count))
-
-                # Backtrack the available count
-                for i in range(26):
-                    available_count[i] += word_count[i]
-
-            return max_score
-
-        # Initial letter count
-        letter_count = [0] * 26
-        for char in letters:
-            letter_count[ord(char) - ord('a')] += 1
-
-        return find_max_score(0, letter_count)
-
-# Example Usage
-solution = Solution()
-words1 = ["dog", "cat", "dad", "good"]
-letters1 = ["a", "a", "c", "d", "d", "d", "g", "o", "o"]
-score1 = [1,0,9,5,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0]
-
-print(solution.maxScoreWords(words1, letters1, score1))  # Output: 23
-
-words2 = ["xxxz", "ax", "bx", "cx"]
-letters2 = ["z", "a", "b", "c", "x", "x", "x"]
-score2 = [4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,10]
-#print(solution.maxScoreWords(words2, letters2, score2))  # Output: 27
-
-words3 = ["leetcode"]
-letters3 = ["l", "e", "t", "c", "o", "d"]
-score3 = [0,0,1,1,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0]
-#print(solution.maxScoreWords(words3, letters3, score3))  # Output: 0
+sol = Solution()
+print(sol.maxScoreWords(words, letters, score))
