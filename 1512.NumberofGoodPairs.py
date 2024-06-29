@@ -45,7 +45,7 @@ class Solution(object):
             return 
         for r in range(start, (len(nums) - 1)):
            if ((nums[start] == nums[r+1]) and (r < r+1)):
-               # print(f'({start}, {r+1}):{nums[start]}, {nums[r+1]}')
+                print(f'({start}, {r+1}):{nums[start]}, {nums[r+1]}')
                 self.arr.append((nums[start], nums[r+1]))
 
         self._buildArray(nums, start + 1)
